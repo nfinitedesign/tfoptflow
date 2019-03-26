@@ -25,7 +25,7 @@ def _main():
 
     # Set controller device and devices
     # A one-gpu setup would be something like controller='/device:GPU:0' and gpu_devices=['/device:GPU:0']
-    gpu_devices = ['/device:GPU:0', '/device:GPU:1']
+    gpu_devices = ['/device:GPU:0', '/device:GPU:1', '/device:GPU:2', '/device:GPU:3']
     controller = '/device:CPU:0'
 
     # Useful settings
@@ -44,7 +44,7 @@ def _main():
         'tb_test_imgs': False,  # If True, make test images available to model in training mode
         # Sampling and split options
         'random_seed': 1337,  # random seed used for sampling
-        'val_split': 0.08,  # portion of data reserved for the validation split
+        'val_split': 0.16,  # portion of data reserved for the validation split
         # Augmentation options
         'aug_type': 'basic',  # in [None, 'basic', 'heavy'] to add augmented data to training set
         'aug_labels': True,  # If True, augment both images and labels; otherwise, only augment images
