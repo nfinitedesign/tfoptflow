@@ -29,7 +29,7 @@ def _main():
     controller = '/device:CPU:0'
 
     # Useful settings
-    batch_size = 4
+    batch_size = 8
     img_size = (256, 448)
 
     # Dataset options
