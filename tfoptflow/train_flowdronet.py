@@ -16,8 +16,8 @@ from dataset_kitti import KITTIDataset
 from model_pwcnet import ModelPWCNet
 
 # arguments for paths
-ckpt_path = '/home/azambuja/scratch/kitti_flow_ckpt_training'
-data_path = '/home/azambuja/scratch/kitti_flow'
+ckpt_path = '/home/azambuja/scratch/kitti_flow_ckpt_training/'
+data_path = '/home/azambuja/scratch/kitti_flow/'
 
 # Main Function
 def _main():
@@ -34,13 +34,13 @@ def _main():
     # Dataset options
     ds_opts = {
         'batch_size': batch_size,
-        'verbose': True,
+        'verbose': False,
         'in_memory': False,  # True loads all samples upfront, False loads them on-demand
         'crop_preproc': img_size,  # None or (h, w), use (384, 768) for FlyingThings3D
         'scale_preproc': None,  # None or (h, w),
         # ['clean' | 'final'] for MPISintel, ['noc' | 'occ'] for KITTI, 'into_future' for FlyingThings3D
         'type': 'noc',
-        'tb_test_imgs': True,  # If True, make test images available to model in training mode
+        'tb_test_imgs': False,  # If True, make test images available to model in training mode
         # Sampling and split options
         'random_seed': 1337,  # random seed used for sampling
         'val_split': 0.16,  # portion of data reserved for the validation split
@@ -62,7 +62,7 @@ def _main():
 
     # Training options
     nn_opts = {
-        'verbose': True,
+        'verbose': False,
         'ckpt_path': None,  # original checkpoint to finetune
         'ckpt_dir': ckpt_path,  # where finetuning checkpoints are stored
         'max_to_keep': 10,
