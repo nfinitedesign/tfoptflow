@@ -11,7 +11,7 @@ from dataset_kitti import KITTIDataset
 from model_pwcnet import ModelPWCNet
 
 # arguments for paths
-ckpt_path = '/home/azambuja/scratch/pretrained/pwcnet.ckpt-592000'
+ckpt_path = '/home/azambuja/scratch/pretrained/pwcnet.ckpt-595000'
 save_path = '/home/azambuja/scratch/kitti_flow_ckpt_training/'
 data_path = '/home/azambuja/scratch/kitti_flow/'
 
