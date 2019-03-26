@@ -44,7 +44,7 @@ def _main():
         'tb_test_imgs': False,  # If True, make test images available to model in training mode
         # Sampling and split options
         'random_seed': 1337,  # random seed used for sampling
-        'val_split': 0.04,  # portion of data reserved for the validation split
+        'val_split': 0.08,  # portion of data reserved for the validation split
         # Augmentation options
         'aug_type': 'basic',  # in [None, 'basic', 'heavy'] to add augmented data to training set
         'aug_labels': True,  # If True, augment both images and labels; otherwise, only augment images
