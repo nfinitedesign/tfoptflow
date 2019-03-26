@@ -8,8 +8,7 @@ Written by Phil Ferriere
 Licensed under the MIT License (see LICENSE for details)
 
 Tensorboard:
-    [win] tensorboard --logdir=E:\\repos\\tf-optflow\\tfoptflow\\pwcnet-sm-6-2-cyclic-chairsthingsmix-fp16
-    [ubu] tensorboard --logdir=/media/EDrive/repos/tf-optflow/tfoptflow/pwcnet-sm-6-2-cyclic-chairsthingsmix-fp16
+    tensorboard --logdir=<checkpoint_directory>
 """
 import sys
 import tensorflow as tf
@@ -41,7 +40,7 @@ def _main():
         'scale_preproc': None,  # None or (h, w),
         # ['clean' | 'final'] for MPISintel, ['noc' | 'occ'] for KITTI, 'into_future' for FlyingThings3D
         'type': 'noc',
-        'tb_test_imgs': False,  # If True, make test images available to model in training mode
+        'tb_test_imgs': True,  # If True, make test images available to model in training mode
         # Sampling and split options
         'random_seed': 1337,  # random seed used for sampling
         'val_split': 0.16,  # portion of data reserved for the validation split
