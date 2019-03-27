@@ -29,7 +29,7 @@ def _main():
 
     # Dataset options
     ds_opts = {
-        'batch_size': batch_size * len(gpu_devices),
+        'batch_size': batch_size,
         'verbose': False,
         'in_memory': False,  # True loads all samples upfront, False loads them on-demand
         'crop_preproc': img_size,  # None or (h, w), use (384, 768) for FlyingThings3D
