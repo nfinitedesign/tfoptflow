@@ -819,7 +819,7 @@ class OpticalFlowDataset(object):
                 if deterministic:
                     idx = self._val_idx[0:num_samples]
                 else:
-                    idx = np.random.choice(self._val_idx, size=num_samples, replace=False)
+                    idx = np.random.choice(self._val_idx, size=num_samples, replace=True)
 
             images, gt_labels, IDs = self._get_val_samples(idx, as_tuple=as_tuple, simple_IDs=simple_IDs)
 
@@ -834,7 +834,7 @@ class OpticalFlowDataset(object):
                 if deterministic:
                     idx = self._val_idx[0:num_samples]
                 else:
-                    idx = np.random.choice(self._val_idx, size=num_samples, replace=False)
+                    idx = np.random.choice(self._val_idx, size=num_samples, replace=True)
 
             images, gt_labels, pred_labels, IDs = self._get_val_samples_with_preds(
                 idx, as_tuple=as_tuple, simple_IDs=simple_IDs)
@@ -850,7 +850,7 @@ class OpticalFlowDataset(object):
                 if deterministic:
                     idx = self._val_idx[0:num_samples]
                 else:
-                    idx = np.random.choice(self._val_idx, size=num_samples, replace=False)
+                    idx = np.random.choice(self._val_idx, size=num_samples, replace=True)
 
             images, gt_labels, pred_label_paths, IDs = self._get_val_samples_with_pred_paths(
                 idx, as_tuple=as_tuple, simple_IDs=simple_IDs)

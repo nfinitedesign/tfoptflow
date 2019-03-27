@@ -38,7 +38,7 @@ def _main():
         'tb_test_imgs': False,  # If True, make test images available to model in training mode
         # Sampling and split options
         'random_seed': 1337,  # random seed used for sampling
-        'val_split': 0.04 * len(gpu_devices),  # portion of data reserved for the validation split
+        'val_split': 0.04,  # portion of data reserved for the validation split
         # Augmentation options
         'aug_type': 'heavy',  # in [None, 'basic', 'heavy'] to add augmented data to training set
         'aug_labels': True,  # If True, augment both images and labels; otherwise, only augment images
@@ -83,7 +83,7 @@ def _main():
         'use_tf_data': True,  # Set to True to get data from tf.data.Dataset; otherwise, use feed_dict with numpy
         'use_mixed_precision': False,  # Set to True to use mixed precision training (fp16 inputs)
         'loss_scaler': 128.,  # Loss scaler (only used in mixed precision training)
-        'batch_size': batch_size * len(gpu_devices),
+        'batch_size': batch_size,
         'lr_policy': 'multisteps',  # choose between None, 'multisteps', and 'cyclic'; adjust the max_steps below too
         # Multistep lr schedule
         'init_lr': 1e-05,  # initial learning rate
