@@ -1,5 +1,4 @@
 """
-pwcnet_train.ipynb
 PWC-Net model training.
 Written by Phil Ferriere
 Licensed under the MIT License (see LICENSE for details)
@@ -7,13 +6,16 @@ Tensorboard:
     tensorboard --logdir=<checkpoint_directory>
 """
 import tensorflow as tf
+from dataset_mixer import MixedDataset
 from dataset_kitti import KITTIDataset
 from model_pwcnet import ModelPWCNet
 
 # arguments for paths
 ckpt_path = '/home/azambuja/scratch/pretrained/pwcnet.ckpt-595000'
 save_path = '/home/azambuja/scratch/kitti_flow_ckpt_training/'
-data_path = '/home/azambuja/scratch/kitti_flow/'
+data_path = '/home/azambuja/scratch/'
+kitti15 = 'kitti_flow15/'
+kitti12 = 'kitti_flow12/'
 
 # Main Function
 def _main():
@@ -49,7 +51,9 @@ def _main():
     }
 
     # Load train dataset
-    ds = KITTIDataset(mode='train_with_val', ds_root=data_path, options=ds_opts)
+    ds_1 = KITTIDataset(mode='train_with_val', ds_root=data_path + kitti12, options=ds_opts)
+    ds_2 = KITTIDataset(mode='train_with_val', ds_root=data_path + kitti15, options=ds_opts)
+    ds = MixedDataset(mode='train_with_val', datasets=[ds_1, ds_2], options=ds_opts)
 
     # Display dataset configuration
     ds.print_config()

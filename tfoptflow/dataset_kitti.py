@@ -39,9 +39,12 @@ class KITTIDataset(OpticalFlowDataset):
             KITTI2012: training flow mag min=0.0, avg=6.736172669242419, max=232.20108032226562 (194 flows)
             KITTI2015: raining flow mag min=0.0, avg=4.7107220490319, max=256.4881896972656 (200 flows)
         """
-        self.min_flow = 0.
-        self.avg_flow = 4.7107220490319
-        self.max_flow = 256.4881896972656
+        # self.min_flow = 0.
+        # self.avg_flow = 4.7107220490319
+        # self.max_flow = 256.4881896972656
+        self.min_flow = None
+        self.avg_flow = None
+        self.max_flow = None        
         super().__init__(mode, ds_root, options)
         assert(self.opts['type'] in ['noc', 'occ'])
 
