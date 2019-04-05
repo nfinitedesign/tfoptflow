@@ -147,7 +147,7 @@ class OpticalFlowDataset(object):
 
         # Shuffle the data and set trackers
         np.random.seed(self.opts['random_seed'])
-        if self.mode in ['train_noval', 'train_with_val']:
+        if self.mode in ['train_noval', 'train_with_val', 'fine-tune']:
             # Train over the original training set, in the first case
             self._trn_ptr = 0
             self.trn_size = len(self._trn_IDs)
@@ -591,9 +591,13 @@ class OpticalFlowDataset(object):
             # Scale images and/or labels to a fixed size, if requested
             if self.opts['scale_preproc'] is not None:
                 scale_shape = (int(self.opts['scale_preproc'][0]), int(self.opts['scale_preproc'][1]))
-                image[0] = cv2.resize(image[0], scale_shape)
-                image[1] = cv2.resize(image[1], scale_shape)
-                label = cv2.resize(label, scale_shape) * scale_shape[0] / image[0].shape[0]
+                tmp_1 = cv2.resize(image[0], scale_shape)
+                tmp_2 = cv2.resize(image[1], scale_shape)
+                image = np.array([tmp_1, tmp_2])
+                origshape = label.shape
+                label = cv2.resize(label, scale_shape)
+                label[..., 0] = label[..., 0] * scale_shape[0] / origshape[0]
+                label[..., 1] = label[..., 1] * scale_shape[1] / origshape[1]
 
             # Augment the samples, if requested
             if self.opts['aug_type'] is not None:
@@ -652,9 +656,13 @@ class OpticalFlowDataset(object):
             # Scale images and/or labels to a fixed size, if requested
             if self.opts['scale_preproc'] is not None:
                 scale_shape = (int(self.opts['scale_preproc'][0]), int(self.opts['scale_preproc'][1]))
-                image[0] = cv2.resize(image[0], scale_shape)
-                image[1] = cv2.resize(image[1], scale_shape)
-                label = cv2.resize(label, scale_shape) * scale_shape[0] / image[0].shape[0]
+                tmp_1 = cv2.resize(image[0], scale_shape)
+                tmp_2 = cv2.resize(image[1], scale_shape)
+                image = np.array([tmp_1, tmp_2])
+                origshape = label.shape
+                label = cv2.resize(label, scale_shape)
+                label[..., 0] = label[..., 0] * scale_shape[1] / origshape[0]
+                label[..., 1] = label[..., 1] * scale_shape[0] / origshape[1]
 
             images.append(image)
             labels.append(label)

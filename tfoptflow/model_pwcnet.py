@@ -35,9 +35,9 @@ _DEFAULT_PWCNET_TRAIN_OPTIONS = {
     'ckpt_dir': './ckpts_trained/',  # where training checkpoints are stored
     'max_to_keep': 10,
     'x_dtype': tf.float32,  # image pairs input type
-    'x_shape': [2, 384, 448, 3],  # image pairs input shape [2, H, W, 3]
+    'x_shape': [2, 384, 768, 3],  # image pairs input shape [2, H, W, 3]
     'y_dtype': tf.float32,  # u,v flows output type
-    'y_shape': [384, 448, 2],  # u,v flows output shape [H, W, 2]
+    'y_shape': [384, 768, 2],  # u,v flows output shape [H, W, 2]
     'train_mode': 'train',  # in ['train', 'fine-tune']
     'adapt_info': None,  # if predicted flows are padded by the model, crop them back by to this size
     'sparse_gt_flow': False,  # if gt flows are sparse (KITTI), only compute average EPE where gt flows aren't (0., 0.)
@@ -419,14 +419,23 @@ class ModelPWCNet(ModelBase):
         """
         # Ensure we're dealing with u,v flows
         assert (isinstance(y, np.ndarray) or isinstance(y, list))
+        reshape = False
         if isinstance(y, np.ndarray):
-            assert (len(y.shape) == 4)
-            assert (y.shape[3] == 2)
+            if len(y.shape) == 1:
+                reshape = True
+            else:
+                assert (len(y.shape) == 4)
+                assert (y.shape[3] == 2)
         else:
             assert (len(y[0].shape) == 3)
             assert (y[0].shape[2] == 2)
 
-        y_adapt = np.array(y, dtype=np.float32) if isinstance(y, list) else y  # list[(H,W,2)] -> (batch_size,H,W,2)
+        if reshape:
+            y_adapt = np.zeros((y.shape[0], y[0].shape[0], y[0].shape[1], y[0].shape[2]), dtype=np.float32)
+            for i in range(y.shape[0]):
+                y_adapt[i,...] = y[i]
+        else:
+            y_adapt = np.array(y, dtype=np.float32) if isinstance(y, list) else y  # list[(H,W,2)] -> (batch_size,H,W,2)
 
         # Make sure the flow dimensions are multiples of 2**pyramid_levels, pad them if they're not
         _, pad_h = divmod(y.shape[1], 2**self.opts['pyr_lvls'])
@@ -642,6 +651,7 @@ class ModelPWCNet(ModelBase):
                     x, y, _ = self.sess.run(train_next_batch)
                 else:
                     x, y, _ = self.ds.next_batch(batch_size * self.num_gpus, split='train')
+
                 x_adapt, _ = self.adapt_x(x)
                 y_adapt, _ = self.adapt_y(y)
 
