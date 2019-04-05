@@ -17,15 +17,13 @@ from model_pwcnet import ModelPWCNet
 ckpt_path = '/home/azambuja/scratch/pretrained/pwcnet.ckpt-595000'
 save_path = '/home/azambuja/scratch/kitti_flow_ckpt_training/'
 data_path = '/home/azambuja/scratch/'
-ckpt_path = '/Users/nfinite/data/tfoptflow/pretrained/pwcnet.ckpt-592000'
+ckpt_path = '/Users/nfinite/data/collision_new/pretrained/pwcnet.ckpt-592000'
 save_path = '/Users/nfinite/data/tfoptflow/kitti_flow_ckpt_training/'
 _DATASET_ROOT = '/Users/nfinite/data/collision_new/'
-kitti15 = 'KITTI15_resized'
-kitti12 = 'KITTI12_resized'
 """
-ckpt_path = '/Users/nfinite/data/tfoptflow/pretrained/pwcnet.ckpt-592000'
-save_path = '/Users/nfinite/data/tfoptflow/kitti_flow_ckpt_training/'
-_DATASET_ROOT = '/Users/nfinite/data/collision_new/'
+ckpt_path = '/home/azambuja/scratch/pretrained/pwcnet.ckpt-592000'
+save_path = '/home/azambuja/scratch/finetune_small/'
+_DATASET_ROOT = '/home/azambuja/scratch/'
 _TRAIN_IMGS = 'train_real'
 _TRAIN_FLOW = 'train_flow'
 _TEST_IMGS = 'train_real'
@@ -35,7 +33,7 @@ def _main():
 
     # Set controller device and devices
     # A one-gpu setup would be something like controller='/device:GPU:0' and gpu_devices=['/device:GPU:0']
-    gpu_devices = ['/device:GPU:0']
+    gpu_devices = ['/device:GPU:0','/device:GPU:1','/device:GPU:2','/device:GPU:3']
     controller = '/device:CPU:0'
 
     # Useful settings
