@@ -37,7 +37,7 @@ def _main():
     controller = '/device:CPU:0'
 
     # Useful settings
-    batch_size = 4
+    batch_size = 8
     img_size = (448, 256)
 
     # Dataset options
@@ -76,7 +76,7 @@ def _main():
         'verbose': True,
         'ckpt_path': ckpt_path,  # original checkpoint to finetune
         'ckpt_dir': save_path,  # where finetuning checkpoints are stored
-        'max_to_keep': 10,
+        'max_to_keep': 20,
         'x_dtype': tf.float32,  # image pairs input type
         'x_shape': [2, img_size[1], img_size[0], 3],  # image pairs input shape [2, H, W, 3]
         'y_dtype': tf.float32,  # u,v flows output type
@@ -100,7 +100,7 @@ def _main():
         'use_tf_data': False,  # Set to True to get data from tf.data.Dataset; otherwise, use feed_dict with numpy
         'use_mixed_precision': False,  # Set to True to use mixed precision training (fp16 inputs)
         'loss_scaler': 128.,  # Loss scaler (only used in mixed precision training)
-        'batch_size': batch_size * len(gpu_devices),
+        'batch_size': batch_size,
         'lr_policy': 'multisteps',  # choose between None, 'multisteps', and 'cyclic'; adjust the max_steps below too
         # Multistep lr schedule
         'init_lr': 1e-04,  # initial learning rate
