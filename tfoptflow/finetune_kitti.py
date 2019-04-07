@@ -22,7 +22,7 @@ save_path = '/Users/nfinite/data/tfoptflow/kitti_flow_ckpt_training/'
 _DATASET_ROOT = '/Users/nfinite/data/collision_new/'
 """
 ckpt_path = '/home/azambuja/scratch/pretrained/pwcnet.ckpt-592000'
-save_path = '/home/azambuja/scratch/finetune_small/'
+save_path = '/home/azambuja/scratch/kitti_flow_ckpt_training/'
 _DATASET_ROOT = '/home/azambuja/scratch/'
 _TRAIN_IMGS = 'train_real'
 _TRAIN_FLOW = 'train_flow'
