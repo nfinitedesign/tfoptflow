@@ -88,6 +88,7 @@ def flow_read(src_file):
         MIT License
     """
     # Read in the entire file, if it exists
+    print(src_file)
     assert(os.path.exists(src_file))
 
     if src_file.lower().endswith('.flo'):
